@@ -1,0 +1,1 @@
+dotnet build src/VideoEditor.Presentation/VideoEditor.Presentation.csproj --verbosity minimal
