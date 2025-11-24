@@ -1,0 +1,157 @@
+<Window x:Class="VideoEditor.Presentation.Views.CropOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#00FFFFFF"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Focusable="False"
+        Topmost="True"
+        d:DesignWidth="800" d:DesignHeight="450">
+    <Canvas x:Name="RootCanvas" Background="#00FFFFFF">
+        <!-- 半透明遮罩（镂空由代码设置） -->
+        <Path x:Name="MaskPath" Fill="#80000000" Stroke="Transparent"/>
+
+        <!-- 视频边界可视化（黄色虚线框） -->
+        <Rectangle Name="VideoBoundaryRect"
+                   Stroke="#FFFF00"
+                   StrokeThickness="3"
+                   StrokeDashArray="10,5"
+                   Fill="Transparent"
+                   Visibility="Visible"
+                   Opacity="0.8"/>
+
+        <!-- 选取框 -->
+        <Border x:Name="Selector"
+                BorderBrush="#2196F3"
+                BorderThickness="2"
+                Background="#332196F3"
+                Width="200" Height="150"
+                Cursor="SizeAll"
+                MouseLeftButtonDown="Selector_MouseLeftButtonDown"
+                MouseMove="Selector_MouseMove"
+                MouseLeftButtonUp="Selector_MouseLeftButtonUp"
+                MouseEnter="Selector_MouseEnter"
+                MouseLeave="Selector_MouseLeave">
+
+            <!-- 右键菜单 -->
+            <Border.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="✅ 应用裁剪 (Enter)" Click="ApplyCropMenuItem_Click"/>
+                    <MenuItem Header="🔄 重置到中心" Click="ResetToCenterMenuItem_Click"/>
+                    <Separator/>
+                    <MenuItem Header="❌ 取消 (Esc)" Click="CancelCropMenuItem_Click"/>
+                </ContextMenu>
+            </Border.ContextMenu>
+            <Grid>
+                <Grid x:Name="GridLines" Opacity="0.5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/><RowDefinition/><RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Line Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="0" X2="1" Y2="0" Stroke="White" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                    <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="0" X2="1" Y2="0" Stroke="White" StrokeThickness="1" Stretch="Fill" VerticalAlignment="Bottom"/>
+                    <Line Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" X1="0" Y1="0" X2="0" Y2="1" Stroke="White" StrokeThickness="1" Stretch="Fill" HorizontalAlignment="Right"/>
+                    <Line Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" X1="0" Y1="0" X2="0" Y2="1" Stroke="White" StrokeThickness="1" Stretch="Fill" HorizontalAlignment="Right"/>
+                </Grid>
+
+                <!-- 8个拖拽点 -->
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,-6,0,0" Cursor="SizeNWSE" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="TopLeft"/>
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-6,0,0" Cursor="SizeNS" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="Top"/>
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-6,-6,0" Cursor="SizeNESW" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="TopRight"/>
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="-6,0,0,0" Cursor="SizeWE" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="Left"/>
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-6,0" Cursor="SizeWE" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="Right"/>
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-6,0,0,-6" Cursor="SizeNESW" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="BottomLeft"/>
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-6" Cursor="SizeNS" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="Bottom"/>
+                <Ellipse Width="12" Height="12" Fill="#2196F3" Stroke="White" StrokeThickness="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-6,-6" Cursor="SizeNWSE" MouseLeftButtonDown="Handle_MouseLeftButtonDown" Tag="BottomRight"/>
+
+                <Border Background="{DynamicResource Brush.ButtonLightBlue}" 
+                        BorderBrush="{DynamicResource Brush.AccentPrimary}" 
+                        BorderThickness="1" 
+                        CornerRadius="3" 
+                        Padding="8,4" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Top" 
+                        Margin="0,-30,0,0">
+                    <TextBlock x:Name="SizeText" 
+                               Text="200 × 150 (1.33:1)" 
+                               FontSize="12" 
+                               FontFamily="Consolas" 
+                               FontWeight="Bold" 
+                               Foreground="{DynamicResource Brush.AccentPrimary}"/>
+                </Border>
+
+                <!-- 比例锁定指示器 -->
+                <Border x:Name="AspectLockIndicator" 
+                        Background="{DynamicResource Brush.ButtonSuccess}" 
+                        BorderBrush="{DynamicResource Brush.ButtonSuccess}" 
+                        BorderThickness="2" 
+                        CornerRadius="12"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top" 
+                        Margin="0,-35,8,0" 
+                        Padding="6,2"
+                        Visibility="Collapsed">
+                    <TextBlock Text="🔒 比例锁定" 
+                               FontSize="10" 
+                               FontWeight="Bold" 
+                               Foreground="White"/>
+                </Border>
+
+                <!-- 操作提示 -->
+                <Border Background="{DynamicResource Brush.PanelBackground}" 
+                        BorderBrush="{DynamicResource Brush.PanelBorder}" 
+                        BorderThickness="1" 
+                        CornerRadius="4"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Padding="12,8" 
+                        Opacity="0.95" 
+                        Visibility="Collapsed" 
+                        x:Name="OperationHint">
+                    <StackPanel>
+                        <TextBlock Text="🎯 裁剪操作提示" 
+                                   FontSize="12" 
+                                   FontWeight="Bold" 
+                                   Foreground="{DynamicResource Brush.TextPrimary}" 
+                                   HorizontalAlignment="Center" 
+                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="• 拖拽移动: 点击内部任意位置拖拽" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextPrimary}" 
+                                   Margin="0,2"/>
+                        <TextBlock Text="• 调整大小: 拖拽边框上的8个控制点" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextPrimary}" 
+                                   Margin="0,2"/>
+                        <TextBlock Text="• 微调移动: 方向键 (Ctrl+方向键=10像素)" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextPrimary}" 
+                                   Margin="0,2"/>
+                        <TextBlock Text="• 确认/取消: Enter/Esc 或双击/右键" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextPrimary}" 
+                                   Margin="0,2"/>
+                        <TextBlock Text="• 比例控制: 界面复选框锁定比例" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextPrimary}" 
+                                   Margin="0,2"/>
+                        <TextBlock x:Name="AspectHintText" 
+                                   Text="• 当前比例: 自由调整" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.ButtonSuccess}" 
+                                   Margin="0,2" 
+                                   FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Canvas>
+</Window>
+

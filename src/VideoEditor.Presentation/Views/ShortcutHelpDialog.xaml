@@ -1,0 +1,91 @@
+<Window x:Class="VideoEditor.Presentation.Views.ShortcutHelpDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="快捷键帮助" 
+        Height="650" Width="850"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        Background="{DynamicResource Brush.PanelBackground}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题 -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource Brush.AccentPrimary}"
+                Padding="20,16">
+            <StackPanel>
+                <TextBlock Text="⌨️ 快捷键列表"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource Brush.WindowBackground}"/>
+                <TextBlock Text="提示:按Ctrl+?或Shift+?键随时查看此帮助"
+                           FontSize="12"
+                           Foreground="{DynamicResource Brush.ButtonLightGreen}"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 内容 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+            <StackPanel>
+                <!-- 播放控制 -->
+                <TextBlock Text="▶️ 播放控制" FontSize="16" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock Text="空格 - 播放/暂停 | S - 停止" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                <TextBlock Text="← / → - 快退/快进5秒 | Shift+← / → - 精确前进/后退100毫秒" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                <TextBlock Text="Home / End - 跳转到开始/结束 | PgUp / PgDn - 上/下一个视频" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,16"/>
+                
+                <!-- 速度与音量 -->
+                <TextBlock Text="🎚️ 速度与音量" FontSize="16" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock Text="[ - 减速(-0.25x) | ] - 加速(+0.25x) | R - 重置速度(1.0x)" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                <TextBlock Text="↑ / ↓ - 音量+5/-5 | M - 静音切换 | L - 循环播放" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,16"/>
+                
+                <!-- 入出点标记 -->
+                <TextBlock Text="🎯 入出点标记" FontSize="16" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock Text="I - 标记入点 | O - 标记出点" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                <TextBlock Text="Ctrl+I - 跳转到入点 | Ctrl+O - 跳转到出点" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                <TextBlock Text="Shift+I - 清除入点 | Shift+O - 清除出点" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                <TextBlock Text="Shift+X / Delete - 清除所有标记 | Shift+Space - 播放标记区间" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,16"/>
+                
+                <!-- 界面操作 -->
+                <TextBlock Text="🖥️ 界面操作" FontSize="16" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock Text="F5 - 截取当前帧 | F11 / F - 全屏切换 | Esc - 退出全屏" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                <TextBlock Text="F1 - 使用文档 | Ctrl+? / Shift+? - 显示此帮助 | 点击时间标签 - 输入时间跳转" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,16"/>
+                
+                <!-- 说明 -->
+                <Border Background="{DynamicResource Brush.ButtonLightBlue}"
+                        BorderBrush="{DynamicResource Brush.AccentPrimary}"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="16"
+                        Margin="0,8,0,0">
+                    <StackPanel>
+                        <TextBlock Text="💡 提示"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource Brush.AccentPrimary}"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="• 进度条上会显示入点(蓝色)和出点(橙色)标记" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                        <TextBlock Text="• 入出点之间会显示绿色高亮区域" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                        <TextBlock Text="• 拖拽进度条可以快速定位,松开后跳转" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                        <TextBlock Text="• 点击当前时间标签可以精确输入时间跳转" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- 底部按钮 -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource Brush.PanelAltBackground}"
+                BorderBrush="{DynamicResource Brush.PanelBorder}"
+                BorderThickness="0,1,0,0"
+                Padding="20,16">
+            <Button Content="关闭" Width="100" Height="36" Click="Close_Click"
+                    FontSize="14" Style="{DynamicResource ButtonInfoStyle}"
+                    Cursor="Hand" HorizontalAlignment="Right"/>
+        </Border>
+    </Grid>
+</Window>

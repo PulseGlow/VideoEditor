@@ -1,0 +1,30 @@
+# Build outputs
+bin/
+obj/
+*/bin/
+*/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+*.VC.db
+
+# Installer build artifacts
+Installer/bin/
+Installer/obj/
+
+# Release artifacts (use GitHub Releases instead)
+Release/
+
+# Logs and temporary files
+debug.log
+*.log
+*.tmp
+
+# Misc
+Thumbs.db
+*.bak
+*.orig
+

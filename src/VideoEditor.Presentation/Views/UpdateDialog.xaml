@@ -1,0 +1,202 @@
+<Window x:Class="VideoEditor.Presentation.Views.UpdateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="检查更新" 
+        Height="500" Width="600"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        Background="{DynamicResource Brush.PanelBackground}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题 -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource Brush.AccentPrimary}"
+                Padding="20,16">
+            <StackPanel>
+                <TextBlock x:Name="TitleTextBlock"
+                           Text="🔍 检查更新"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource Brush.WindowBackground}"/>
+                <TextBlock x:Name="SubtitleTextBlock"
+                           Text="正在检查更新..."
+                           FontSize="12"
+                           Foreground="{DynamicResource Brush.ButtonLightGreen}"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 内容 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+            <StackPanel x:Name="ContentPanel">
+                <!-- 加载中 -->
+                <StackPanel x:Name="LoadingPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40">
+                    <TextBlock Text="⏳ 正在检查更新..." 
+                               FontSize="14" 
+                               Foreground="{DynamicResource Brush.TextSecondary}"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,16"/>
+                    <ProgressBar IsIndeterminate="True" 
+                                 Height="6" 
+                                 Width="300"
+                                 HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- 错误信息 -->
+                <StackPanel x:Name="ErrorPanel" Visibility="Collapsed">
+                    <TextBlock Text="❌ 检查更新失败" 
+                               FontSize="16" 
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource Brush.TextPrimary}"
+                               Margin="0,0,0,12"/>
+                    <TextBlock x:Name="ErrorMessageTextBlock"
+                               TextWrapping="Wrap"
+                               FontSize="13" 
+                               Foreground="{DynamicResource Brush.TextSecondary}"
+                               Margin="0,4"/>
+                </StackPanel>
+
+                <!-- 更新信息 -->
+                <StackPanel x:Name="UpdateInfoPanel" Visibility="Collapsed">
+                    <!-- 版本信息 -->
+                    <Border Background="{DynamicResource Brush.ButtonLightBlue}"
+                            BorderBrush="{DynamicResource Brush.AccentPrimary}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="16"
+                            Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="📦 版本信息" 
+                                       FontSize="14" 
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource Brush.AccentPrimary}"
+                                       Margin="0,0,0,12"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Text="当前版本：" 
+                                           FontSize="12" 
+                                           Foreground="{DynamicResource Brush.TextSecondary}"
+                                           Grid.Row="0" Grid.Column="0"
+                                           Margin="0,4"/>
+                                <TextBlock x:Name="CurrentVersionTextBlock"
+                                           Text="1.0.0" 
+                                           FontSize="12" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource Brush.TextPrimary}"
+                                           Grid.Row="0" Grid.Column="1"
+                                           Margin="8,4,0,4"/>
+                                
+                                <TextBlock Text="最新版本：" 
+                                           FontSize="12" 
+                                           Foreground="{DynamicResource Brush.TextSecondary}"
+                                           Grid.Row="1" Grid.Column="0"
+                                           Margin="0,4"/>
+                                <TextBlock x:Name="LatestVersionTextBlock"
+                                           Text="1.0.0" 
+                                           FontSize="12" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource Brush.AccentPrimary}"
+                                           Grid.Row="1" Grid.Column="1"
+                                           Margin="8,4,0,4"/>
+                                
+                                <TextBlock Text="发布日期：" 
+                                           FontSize="12" 
+                                           Foreground="{DynamicResource Brush.TextSecondary}"
+                                           Grid.Row="2" Grid.Column="0"
+                                           Margin="0,4"/>
+                                <TextBlock x:Name="ReleaseDateTextBlock"
+                                           Text="-" 
+                                           FontSize="12" 
+                                           Foreground="{DynamicResource Brush.TextPrimary}"
+                                           Grid.Row="2" Grid.Column="1"
+                                           Margin="8,4,0,4"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 更新说明 -->
+                    <TextBlock Text="📝 更新说明" 
+                               FontSize="16" 
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource Brush.TextPrimary}"
+                               Margin="0,0,0,8"/>
+                    <Border Background="{DynamicResource Brush.PanelAltBackground}"
+                            BorderBrush="{DynamicResource Brush.PanelBorder}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="12"
+                            MaxHeight="200">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="ReleaseNotesTextBlock"
+                                       TextWrapping="Wrap"
+                                       FontSize="12" 
+                                       Foreground="{DynamicResource Brush.TextSecondary}"
+                                       Text="无更新说明"/>
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
+
+                <!-- 已是最新版本 -->
+                <StackPanel x:Name="UpToDatePanel" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40">
+                    <TextBlock Text="✅" 
+                               FontSize="48" 
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,16"/>
+                    <TextBlock Text="您使用的是最新版本！" 
+                               FontSize="16" 
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource Brush.TextPrimary}"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,8"/>
+                    <TextBlock x:Name="CurrentVersionDisplayTextBlock"
+                               Text="当前版本：1.0.0" 
+                               FontSize="13" 
+                               Foreground="{DynamicResource Brush.TextSecondary}"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- 底部按钮 -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource Brush.PanelAltBackground}"
+                BorderBrush="{DynamicResource Brush.PanelBorder}"
+                BorderThickness="0,1,0,0"
+                Padding="20,16">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="DownloadButton"
+                        Content="前往下载" 
+                        Width="120" 
+                        Height="36" 
+                        Click="DownloadButton_Click"
+                        FontSize="14" 
+                        Style="{DynamicResource ButtonPrimaryStyle}"
+                        Cursor="Hand" 
+                        Margin="0,0,12,0"
+                        Visibility="Collapsed"/>
+                <Button Content="关闭" 
+                        Width="100" 
+                        Height="36" 
+                        Click="CloseButton_Click"
+                        FontSize="14" 
+                        Style="{DynamicResource ButtonInfoStyle}"
+                        Cursor="Hand"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
+

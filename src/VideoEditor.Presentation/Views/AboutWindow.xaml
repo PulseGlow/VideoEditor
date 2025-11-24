@@ -1,0 +1,208 @@
+<Window x:Class="VideoEditor.Presentation.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="关于" 
+        Height="550" Width="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{DynamicResource Brush.PanelBackground}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题 -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource Brush.AccentPrimary}"
+                Padding="20,20">
+            <StackPanel>
+                <TextBlock Text="VideoEditor"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource Brush.WindowBackground}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock x:Name="VersionTextBlock"
+                           Text="版本 1.0.0"
+                           FontSize="14"
+                           Foreground="{DynamicResource Brush.ButtonLightGreen}"
+                           HorizontalAlignment="Center"
+                           Margin="0,8,0,0"/>
+                <TextBlock Text="视频编辑器"
+                           FontSize="12"
+                           Foreground="{DynamicResource Brush.ButtonLightGreen}"
+                           HorizontalAlignment="Center"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 内容 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+            <StackPanel>
+                <!-- 描述 -->
+                <TextBlock TextWrapping="Wrap" 
+                           FontSize="13" 
+                           Foreground="{DynamicResource Brush.TextSecondary}"
+                           TextAlignment="Center"
+                           Margin="0,0,0,20">
+                    <Run Text="一款功能强大的视频编辑应用程序，"/>
+                    <Run Text="支持视频播放、编辑、AI 字幕生成等功能。"/>
+                </TextBlock>
+
+                <!-- 版权信息 -->
+                <Border Background="{DynamicResource Brush.PanelAltBackground}"
+                        BorderBrush="{DynamicResource Brush.PanelBorder}"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="16"
+                        Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="© 2025 PulseGlow" 
+                                   FontSize="12" 
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource Brush.TextPrimary}"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="保留所有权利" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 项目信息 -->
+                <TextBlock Text="📦 项目信息" 
+                           FontSize="14" 
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource Brush.TextPrimary}"
+                           Margin="0,0,0,8"/>
+                <StackPanel Margin="0,0,0,16">
+                    <Grid Margin="0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="GitHub:" 
+                                   FontSize="12" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Grid.Column="0"/>
+                        <TextBlock x:Name="GitHubLinkTextBlock"
+                                   Text="PulseGlow/VideoEditor" 
+                                   FontSize="12" 
+                                   Foreground="{DynamicResource Brush.AccentPrimary}"
+                                   Grid.Column="1"
+                                   Cursor="Hand"
+                                   MouseLeftButtonDown="GitHubLink_MouseLeftButtonDown"
+                                   TextDecorations="Underline"/>
+                    </Grid>
+                    <Grid Margin="0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="框架:" 
+                                   FontSize="12" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Grid.Column="0"/>
+                        <TextBlock Text=".NET 9.0 + WPF" 
+                                   FontSize="12" 
+                                   Foreground="{DynamicResource Brush.TextPrimary}"
+                                   Grid.Column="1"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- 使用的开源库 -->
+                <TextBlock Text="📚 使用的开源库" 
+                           FontSize="14" 
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource Brush.TextPrimary}"
+                           Margin="0,0,0,8"/>
+                <Border Background="{DynamicResource Brush.PanelAltBackground}"
+                        BorderBrush="{DynamicResource Brush.PanelBorder}"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="12"
+                        Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="• LibVLCSharp 3.9.4 - 视频播放引擎" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Margin="0,2"/>
+                        <TextBlock Text="• FFmpeg - 视频处理工具" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Margin="0,2"/>
+                        <TextBlock Text="• MediaInfo - 媒体信息分析" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Margin="0,2"/>
+                        <TextBlock Text="• Faster-Whisper - 语音识别" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Margin="0,2"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 许可证 -->
+                <TextBlock Text="⚖️ 许可证" 
+                           FontSize="14" 
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource Brush.TextPrimary}"
+                           Margin="0,0,0,8"/>
+                <TextBlock TextWrapping="Wrap" 
+                           FontSize="11" 
+                           Foreground="{DynamicResource Brush.TextSecondary}"
+                           Margin="0,0,0,16">
+                    <Run Text="本软件及其使用的开源库均遵循各自的许可证协议。"/>
+                    <Run Text="请查看各项目的许可证文件了解详情。"/>
+                </TextBlock>
+
+                <!-- 提示 -->
+                <Border Background="{DynamicResource Brush.ButtonLightBlue}"
+                        BorderBrush="{DynamicResource Brush.AccentPrimary}"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="12"
+                        Margin="0,8,0,0">
+                    <StackPanel>
+                        <TextBlock Text="💡 提示"
+                                   FontSize="12"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource Brush.AccentPrimary}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="• 按 F1 查看使用文档" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Margin="0,2"/>
+                        <TextBlock Text="• 按 Ctrl+? 查看快捷键列表" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Margin="0,2"/>
+                        <TextBlock Text="• 点击 GitHub 链接访问项目主页" 
+                                   FontSize="11" 
+                                   Foreground="{DynamicResource Brush.TextSecondary}"
+                                   Margin="0,2"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- 底部按钮 -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource Brush.PanelAltBackground}"
+                BorderBrush="{DynamicResource Brush.PanelBorder}"
+                BorderThickness="0,1,0,0"
+                Padding="20,16">
+            <Button Content="确定" 
+                    Width="100" 
+                    Height="36" 
+                    Click="CloseButton_Click"
+                    FontSize="14" 
+                    Style="{DynamicResource ButtonInfoStyle}"
+                    Cursor="Hand" 
+                    HorizontalAlignment="Right"/>
+        </Border>
+    </Grid>
+</Window>
+

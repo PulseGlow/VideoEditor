@@ -1,0 +1,56 @@
+<Window x:Class="VideoEditor.Presentation.Views.AiSubtitleProviderSelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="选择字幕 AI 供应商"
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="WidthAndHeight"
+        MinWidth="420"
+        MinHeight="320"
+        ResizeMode="NoResize"
+        Background="{DynamicResource Brush.WindowBackground}"
+        Foreground="{DynamicResource Brush.TextPrimary}">
+    <Border Padding="16" 
+            Background="{DynamicResource Brush.PanelBackground}" 
+            BorderBrush="{DynamicResource Brush.PanelBorder}" 
+            BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ListBox x:Name="ProviderListBox" 
+                     DisplayMemberPath="DisplayName" 
+                     Height="220"
+                     Background="{DynamicResource Brush.ControlBackground}"
+                     Foreground="{DynamicResource Brush.TextPrimary}"
+                     BorderBrush="{DynamicResource Brush.ControlBorder}"
+                     MouseDoubleClick="ProviderListBox_MouseDoubleClick"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+                <CheckBox x:Name="RememberCheckBox" 
+                          Content="记住本次选择" 
+                          Margin="0,0,16,0"
+                          Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <Button Content="管理..." 
+                        Width="80" 
+                        Margin="0,0,8,0" 
+                        Click="ManageButton_Click"
+                        Foreground="{DynamicResource Brush.TextPrimary}"
+                        Style="{DynamicResource ButtonSecondaryStyle}"/>
+                <Button Content="取消" 
+                        Width="80" 
+                        Margin="0,0,8,0" 
+                        Click="CancelButton_Click"
+                        Foreground="{DynamicResource Brush.TextPrimary}"
+                        Style="{DynamicResource ButtonSecondaryStyle}"/>
+                <Button Content="确定" 
+                        Width="90" 
+                        Click="ConfirmButton_Click"
+                        Foreground="{DynamicResource Brush.TextPrimary}"
+                        Style="{DynamicResource ButtonPrimaryStyle}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
+

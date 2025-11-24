@@ -1,0 +1,163 @@
+<Window x:Class="VideoEditor.Presentation.Views.HelpDocumentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="使用文档" 
+        Height="700" Width="900"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        Background="{DynamicResource Brush.PanelBackground}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题 -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource Brush.AccentPrimary}"
+                Padding="20,16">
+            <StackPanel>
+                <TextBlock Text="📖 使用文档"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource Brush.WindowBackground}"/>
+                <TextBlock Text="VideoEditor 视频编辑器使用指南"
+                           FontSize="12"
+                           Foreground="{DynamicResource Brush.ButtonLightGreen}"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 内容 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+            <StackPanel>
+                <!-- 快速开始 -->
+                <TextBlock Text="🚀 快速开始" FontSize="18" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="1. 打开文件：点击" FontWeight="Normal"/>
+                    <Run Text="文件 → 打开文件" FontWeight="Bold"/>
+                    <Run Text="或按 Ctrl+O 添加视频文件到列表"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="2. 播放视频：双击列表中的视频文件或点击播放按钮"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="3. 编辑视频：在剪辑区域选择功能，设置参数后点击执行"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,20">
+                    <Run Text="4. 保存项目：点击" FontWeight="Normal"/>
+                    <Run Text="文件 → 保存项目" FontWeight="Bold"/>
+                    <Run Text="或按 Ctrl+S 保存当前工作状态"/>
+                </TextBlock>
+                
+                <!-- 核心功能 -->
+                <TextBlock Text="✨ 核心功能" FontSize="18" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                
+                <TextBlock Text="📹 视频编辑" FontSize="16" FontWeight="Bold" Margin="0,8,0,8" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 视频剪切：精确剪切视频片段，支持快速复制编码和重新编码"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 视频裁剪：裁剪视频画面区域，可调整分辨率"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 视频合并：合并多个视频文件，支持不同格式统一编码"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 视频转码：转换视频编码格式（H.264/H.265），调整质量参数"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,12">
+                    <Run Text="• 更多功能：水印处理、视频效果、去重处理、字幕处理等"/>
+                </TextBlock>
+                
+                <TextBlock Text="🎬 播放控制" FontSize="16" FontWeight="Bold" Margin="0,8,0,8" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 播放/暂停：空格键或点击播放按钮"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 快进/快退：← → 键快退/快进5秒，Shift+← → 精确调整100毫秒"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 入出点标记：I/O 键标记入出点，用于精确剪切"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,12">
+                    <Run Text="• 速度控制：[ ] 键调整播放速度，R 键重置速度"/>
+                </TextBlock>
+                
+                <TextBlock Text="🤖 AI 字幕生成" FontSize="16" FontWeight="Bold" Margin="0,8,0,8" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 支持多种 AI 供应商：DeepSeek API、Faster-Whisper（本地）、Bcut ASR、JianYing ASR"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 自动音频分块：长视频自动分割处理，避免超时"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 字幕优化：使用 LLM 优化字幕质量，修正错别字和标点"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,12">
+                    <Run Text="• 批量处理：支持批量生成字幕，进度实时监控"/>
+                </TextBlock>
+                
+                <!-- 界面布局 -->
+                <TextBlock Text="🖥️ 界面布局" FontSize="18" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 播放器模式：按 Ctrl+1 切换到播放器模式，隐藏编辑区域"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 剪辑模式：按 Ctrl+2 切换到剪辑模式，显示完整编辑功能"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 布局切换：支持标准布局（6区域）和精简布局（4区域）"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,12">
+                    <Run Text="• 主题切换：支持亮色和暗色主题，在视图菜单中切换"/>
+                </TextBlock>
+                
+                <!-- 项目功能 -->
+                <TextBlock Text="📦 项目管理" FontSize="18" FontWeight="Bold" Margin="0,0,0,12" Foreground="{DynamicResource Brush.TextPrimary}"/>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 保存项目：保存当前视频列表、播放历史、编辑参数等状态"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4">
+                    <Run Text="• 打开项目：快速恢复之前的工作状态"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4,0,12">
+                    <Run Text="• 最近项目：文件菜单中显示最近打开的8个项目"/>
+                </TextBlock>
+                
+                <!-- 提示框 -->
+                <Border Background="{DynamicResource Brush.ButtonLightBlue}"
+                        BorderBrush="{DynamicResource Brush.AccentPrimary}"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="16"
+                        Margin="0,8,0,0">
+                    <StackPanel>
+                        <TextBlock Text="💡 使用技巧"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource Brush.AccentPrimary}"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="• 使用入出点标记可以精确选择要剪切的片段" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                        <TextBlock Text="• 在命令预览窗口中可以查看和编辑 FFmpeg 命令" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                        <TextBlock Text="• 批量处理时可以在任务监控标签页查看进度" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                        <TextBlock Text="• 按 F1 查看使用文档，按 Ctrl+? 查看快捷键列表" FontSize="12" Foreground="{DynamicResource Brush.TextSecondary}" Margin="0,4"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- 底部按钮 -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource Brush.PanelAltBackground}"
+                BorderBrush="{DynamicResource Brush.PanelBorder}"
+                BorderThickness="0,1,0,0"
+                Padding="20,16">
+            <Button Content="关闭" Width="100" Height="36" Click="Close_Click"
+                    FontSize="14" Style="{DynamicResource ButtonInfoStyle}"
+                    Cursor="Hand" HorizontalAlignment="Right"/>
+        </Border>
+    </Grid>
+</Window>
+

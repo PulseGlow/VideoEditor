@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VideoEditor.Presentation.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastVolume" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="LastMuted" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RecentProjects" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DeepSeekApiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DeepSeekBaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.deepseek.com</Value>
+    </Setting>
+    <Setting Name="DeepSeekModel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">whisper-1</Value>
+    </Setting>
+    <Setting Name="DeepSeekResponseFormat" Type="System.String" Scope="User">
+      <Value Profile="(Default)">srt</Value>
+    </Setting>
+    <Setting Name="ScreenRecorderSystemAudioDevice" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ScreenRecorderMicrophoneDevice" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AiSubtitleProvidersJson" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastAiSubtitleProviderId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AiSubtitleEnableOptimization" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AiSubtitleOptimizationPrompt" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FasterWhisperProgramPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FasterWhisperModelDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FasterWhisperModelsRootDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FasterWhisperSelectedModel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FasterWhisperDevice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cpu</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
+
+
+
+
+

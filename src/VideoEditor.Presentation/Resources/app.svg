@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆形 -->
+  <circle cx="32" cy="32" r="30" fill="#2196F3" stroke="#1976D2" stroke-width="2"/>
+  
+  <!-- 播放按钮 -->
+  <polygon points="24,20 24,44 44,32" fill="white"/>
+  
+  <!-- 视频胶片效果 -->
+  <rect x="16" y="12" width="4" height="8" fill="white" opacity="0.7"/>
+  <rect x="16" y="22" width="4" height="8" fill="white" opacity="0.7"/>
+  <rect x="16" y="32" width="4" height="8" fill="white" opacity="0.7"/>
+  <rect x="16" y="42" width="4" height="8" fill="white" opacity="0.7"/>
+  
+  <rect x="44" y="12" width="4" height="8" fill="white" opacity="0.7"/>
+  <rect x="44" y="22" width="4" height="8" fill="white" opacity="0.7"/>
+  <rect x="44" y="32" width="4" height="8" fill="white" opacity="0.7"/>
+  <rect x="44" y="42" width="4" height="8" fill="white" opacity="0.7"/>
+</svg>
+

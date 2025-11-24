@@ -1,0 +1,177 @@
+<Window x:Class="VideoEditor.Presentation.Views.CommandPromptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VideoEditor.Presentation.Views"
+        mc:Ignorable="d"
+        Title="FFmpeg 命令提示符"
+        Height="600"
+        Width="900"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource Brush.CommandPromptBackground}"
+        Foreground="{DynamicResource Brush.CommandPromptInputForeground}"
+        FontFamily="Consolas"
+        FontSize="12">
+
+    <Window.Resources>
+        <Style x:Key="ConsoleTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource Brush.CommandPromptBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Brush.CommandPromptInputForeground}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+        </Style>
+
+        <Style x:Key="CommandInputStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource Brush.CommandPromptInputBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Brush.CommandPromptInputForeground}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Brush.CommandPromptInputBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="5,3"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ProgressBarStyle" TargetType="ProgressBar">
+            <Setter Property="Height" Value="4"/>
+            <Setter Property="Background" Value="{DynamicResource Brush.CommandPromptProgressBackground}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Brush.CommandPromptProgressForeground}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 工具栏 -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource Brush.CommandPromptHeaderBackground}"
+                BorderBrush="{DynamicResource Brush.CommandPromptHeaderBorder}"
+                BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Margin="10,5">
+                <Button Name="ClearButton"
+                        Content="🗑️ 清空"
+                        Margin="0,0,10,0"
+                        Padding="8,3"
+                        Style="{DynamicResource ButtonDangerOutlineStyle}"
+                        Click="ClearButton_Click"/>
+                <Button Name="StopButton"
+                        Content="⏹️ 停止"
+                        Margin="0,0,10,0"
+                        Padding="8,3"
+                        Style="{DynamicResource ButtonDangerStyle}"
+                        Click="StopButton_Click"/>
+                <Separator Margin="5,0" Background="{DynamicResource Brush.CommandPromptProgressBackground}"/>
+                <TextBlock Text="FFmpeg 路径:"
+                           VerticalAlignment="Center"
+                           Margin="0,0,5,0"
+                           Foreground="{DynamicResource Brush.TextMuted}"/>
+                <TextBox Name="FFmpegPathTextBox"
+                         Text="ffmpeg.exe"
+                         Width="200"
+                         Margin="0,0,10,0"
+                         Style="{StaticResource CommandInputStyle}"/>
+                <Button Name="BrowseFFmpegButton"
+                        Content="..."
+                        Width="30"
+                        Padding="0"
+                        Style="{DynamicResource ButtonInfoOutlineStyle}"
+                        Click="BrowseFFmpegButton_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 输出显示区域 -->
+        <Border Grid.Row="1"
+                Background="{DynamicResource Brush.CommandPromptBackground}"
+                Margin="5">
+            <ScrollViewer Name="OutputScrollViewer" VerticalScrollBarVisibility="Auto">
+                <TextBox Name="OutputTextBox"
+                         Style="{StaticResource ConsoleTextBoxStyle}"
+                         Text="FFmpeg 命令提示符已就绪...
+输入 FFmpeg 命令并按 Enter 执行
+输入 'help' 查看可用命令
+输入 'clear' 清空输出
+输入 'exit' 关闭窗口
+
+> "/>
+            </ScrollViewer>
+        </Border>
+
+        <!-- 进度条 -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource Brush.CommandPromptHeaderBackground}"
+                BorderBrush="{DynamicResource Brush.CommandPromptHeaderBorder}"
+                BorderThickness="0,1,0,0"
+                Margin="5,0,5,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <ProgressBar Name="ProgressBar"
+                            Grid.Column="0"
+                            Style="{StaticResource ProgressBarStyle}"
+                            Value="0"
+                            Margin="0,5,10,5"/>
+
+                <TextBlock Name="ProgressTextBlock"
+                          Grid.Column="1"
+                          Text="就绪"
+                          Foreground="{DynamicResource Brush.TextMuted}"
+                          VerticalAlignment="Center"
+                          Margin="0,0,10,0"/>
+            </Grid>
+        </Border>
+
+        <!-- 命令输入区域 -->
+        <Border Grid.Row="3"
+                Background="{DynamicResource Brush.CommandPromptHeaderBackground}"
+                BorderBrush="{DynamicResource Brush.CommandPromptHeaderBorder}"
+                BorderThickness="0,1,0,0"
+                Margin="5,0,5,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                          Text="&gt;"
+                          Margin="10,0,5,0"
+                          VerticalAlignment="Center"
+                          Foreground="{DynamicResource Brush.AccentPrimary}"
+                          FontWeight="Bold"/>
+
+                <TextBox Name="CommandTextBox"
+                         Grid.Column="1"
+                         Style="{StaticResource CommandInputStyle}"
+                         KeyDown="CommandTextBox_KeyDown"
+                         TextChanged="CommandTextBox_TextChanged"
+                         Margin="0,5"/>
+
+                <Button Name="ExecuteButton"
+                        Grid.Column="2"
+                        Content="执行"
+                        Width="60"
+                        Margin="5,5,10,5"
+                        Padding="10,3"
+                        Style="{DynamicResource ButtonInfoStyle}"
+                        Click="ExecuteButton_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
