@@ -67,7 +67,7 @@ VideoEditor/
 
 ---
 
-## 开发现状 & 构建
+## 开发 & 构建
 
 1. **恢复依赖**
    ```powershell
@@ -79,14 +79,6 @@ VideoEditor/
    dotnet build src/VideoEditor.Presentation/VideoEditor.Presentation.csproj
    dotnet run --project src/VideoEditor.Presentation/VideoEditor.Presentation.csproj
    ```
-
-3. **生成发布包**
-   ```powershell
-   dotnet publish src/VideoEditor.Presentation/VideoEditor.Presentation.csproj `
-     -c Release -r win-x64 --self-contained true -p:PublishSingleFile=false
-   ```
-   - 输出位于 `src/VideoEditor.Presentation/bin/Release/net9.0-windows/win-x64/publish`
-   - 目录已包含 .NET 运行时、LibVLC、FFmpeg、MediaInfo 等，可直接打包 Zip/安装包
 
 ---
 
@@ -112,13 +104,6 @@ VideoEditor/
 - **主题与 DPI**
   - 亮暗主题切换
   - 125%/150% 缩放下 Popup 对齐与文本清晰度
-
----
-
-## 已知警告/后续优化
-
-- 发布构建存在部分 **nullable 及 CA2022** 警告（见 `dotnet publish` 输出），不会阻挡发布，建议列入后续技术债清理计划。
-- `System.Windows.Forms 4.0.0` 以 .NET Framework 目标还原（NU1701），来自 WPF 对 WinForms 的依赖，属预期。
 
 ---
 
