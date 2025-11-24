@@ -1,5 +1,7 @@
 # 视频编辑器 (VideoEditor)
 
+![展示图](docs/%E5%B1%95%E7%A4%BA%E5%9B%BE.bmp)
+
 面向长视频处理与批量工作流的 Windows 端 WPF 应用，围绕 **播放控制、裁剪/合并、AI 字幕、批量转码** 等高频需求进行深度定制。项目使用 `.NET 9 + WPF + LibVLCSharp`，集成 FFmpeg 与 MediaInfo 工具，可在离线环境下完成大部分视频处理任务。
 
 ---
